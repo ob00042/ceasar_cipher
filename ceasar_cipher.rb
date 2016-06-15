@@ -6,13 +6,29 @@ def ceasar_cipher (phrase, key=0)
 
 	phrase_array.each do |i|
 		
-		if alphabet.include(i)
+		y=alphabet.index(i)
+		z=0
+		
+		if alphabet.include?(i)
 
-			if i===(0..25)  #i am here, not finished this expresion
-		word += alphabet[alphabet.index(i)+key]
+			if (0..25).include?(y)&&((y+key)<26)#check for downcase
+				word += alphabet[y+key]
+			elsif (0..25).include?(y)&&((y+key)>25)
+				z=key+y-26
+				word += alphabet[z]
+			elsif (26..51).include?(y)&&((y+key)<52)#check for upcase
+				word +=alphabet[y+key]
+			else
+				z=key+y-26
+				word += alphabet[z]
+			end
+		
 		else
 		word+=i
 		end
+
+		puts y
+		puts z
 
 	end
 	
@@ -21,5 +37,5 @@ def ceasar_cipher (phrase, key=0)
 
 end
 
-ceasar_cipher("heyHEY", 1)
+ceasar_cipher("hey HEY", 2)
 
